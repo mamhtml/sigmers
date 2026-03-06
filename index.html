@@ -28,16 +28,16 @@ body {
 .image {
     position:absolute;
     top:40%;
-    width:25%; /* responsive width */
+    width:25%; /* responsive */
 }
 
-/* start offscreen for desktop */
+/* start at 0, movement handled in JS */
 #leftImg {
-    left:-25%;
+    left:0;
 }
 
 #rightImg {
-    right:-25%;
+    left:0; /* transform will move it right */
 }
 
 #centerText {
@@ -47,6 +47,7 @@ body {
     transform:translate(-50%,-50%);
     font-size:40px;
     opacity:0;
+    transition:opacity 0.3s;
 }
 
 /* ===== SECTION 3 ===== */
@@ -57,17 +58,17 @@ body {
 }
 
 #movingImage {
+    left:0;
+    width:30%;
     position:absolute;
     top:40%;
-    left:-30%;
-    width:30%;
 }
 
 #followText {
+    left:0;
+    font-size:5vw;
     position:absolute;
     top:42%;
-    left:-20%;
-    font-size:5vw;
     white-space:nowrap;
 }
 
@@ -75,18 +76,14 @@ body {
 @media screen and (max-width: 768px) {
     #leftImg, #rightImg {
         width:40%;
-        left:-40%;
-        right:-40%;
     }
 
     #movingImage {
         width:50%;
-        left:-50%;
     }
 
     #followText {
         font-size:6vw;
-        left:-30%;
     }
 }
 </style>
@@ -95,7 +92,7 @@ body {
 
 <!-- Section 1 -->
 <div class="section1">
-    hi reen
+    hai reenn
 </div>
 
 <!-- Section 2 -->
@@ -125,25 +122,26 @@ window.addEventListener("scroll", function() {
 
     let scroll = window.scrollY;
 
-    /* ----- SECTION 2: images moving toward center ----- */
-    let maxMove2 = (window.innerWidth/2 - left.offsetWidth/2 - 20); // 20px padding
+    /* ----- SECTION 2: images move toward center ----- */
+    let maxMove2 = (window.innerWidth/2 - left.offsetWidth/2 - 20);
     let move2 = scroll * 0.5;
     if(move2 > maxMove2) move2 = maxMove2;
 
-    left.style.left = (-left.offsetWidth) + move2 + "px";
-    right.style.right = (-right.offsetWidth) + move2 + "px";
+    left.style.transform = `translateX(${move2}px)`;
+    right.style.transform = `translateX(${-move2}px)`;
 
     if(move2 > 200){
         text.style.opacity = 1;
     }
 
     /* ----- SECTION 3: image moves left->right, text trails ----- */
-    let maxMove3 = window.innerWidth - img.offsetWidth - 20; // prevent going offscreen
+    let maxMove3 = window.innerWidth - img.offsetWidth - 20;
+
     let imgMove = scroll * 0.5;
     if(imgMove > maxMove3) imgMove = maxMove3;
     img.style.transform = `translateX(${imgMove}px)`;
 
-    let textMove = scroll * 0.35; // trails behind
+    let textMove = scroll * 0.35;
     if(textMove > maxMove3) textMove = maxMove3;
     followText.style.transform = `translateX(${textMove}px)`;
 
