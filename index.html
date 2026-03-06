@@ -4,147 +4,138 @@
 <style>
 body {
     margin:0;
-    font-family: Arial;
-    background-color: #FAF3E0; /* cream background */
-    overflow-x: hidden; /* prevent horizontal scroll */
+    font-family: Arial, sans-serif;
 }
 
-/* ===== SECTION 1 ===== */
-.section1 {
+/* GENERAL SECTION STYLE */
+section {
     height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:60px;
+    padding:20px;
+    box-sizing:border-box;
+    color:#fff;
 }
 
-/* ===== SECTION 2 ===== */
-.section2 {
-    height:100vh;
-    position:relative;
-    overflow:hidden;
+/* SECTION COLORS */
+#section1 { background-color: #FFADAD; } /* soft red */
+#section2 { background-color: #FFD6A5; } /* soft orange */
+#section3 { background-color: #FDFFB6; color:#333; } /* soft yellow */
+#section4 { background-color: #CAFFBF; color:#333; } /* soft green */
+
+/* TEXT STYLE */
+.text-box {
+    max-width: 500px;
+    font-size: 1.5rem;
+    line-height:1.6;
 }
 
-.image {
-    position:absolute;
-    top:40%;
-    width:25%; /* responsive */
+/* SECTION 2 IMAGE LEFT */
+#section2 .container {
+    display:flex;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
 }
 
-/* start at 0, movement handled in JS */
-#leftImg {
-    left:0;
+#section2 img {
+    width:300px;
+    max-width: 40%;
 }
 
-#rightImg {
-    left:0; /* transform will move it right */
+/* SECTION 3 IMAGE RIGHT */
+#section3 .container {
+    display:flex;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
 }
 
-#centerText {
-    position:absolute;
-    top:45%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    font-size:40px;
-    opacity:0;
-    transition:opacity 0.3s;
+#section3 img {
+    width:300px;
+    max-width: 40%;
+    order:2; /* image on right */
 }
 
-/* ===== SECTION 3 ===== */
-.section3 {
-    height:100vh;
-    position:relative;
-    overflow:hidden;
+/* SECTION 4 IMAGE BELOW TEXT */
+#section4 .container {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
 }
 
-#movingImage {
-    left:0;
-    width:30%;
-    position:absolute;
-    top:40%;
+#section4 img {
+    width:250px;
+    max-width: 50%;
 }
 
-#followText {
-    left:0;
-    font-size:5vw;
-    position:absolute;
-    top:42%;
-    white-space:nowrap;
-}
-
-/* ===== MEDIA QUERIES FOR MOBILE ===== */
-@media screen and (max-width: 768px) {
-    #leftImg, #rightImg {
-        width:40%;
+/* RESPONSIVE */
+@media screen and (max-width:768px) {
+    #section2 img,
+    #section3 img,
+    #section4 img {
+        width:80%;
+        max-width: none;
     }
 
-    #movingImage {
-        width:50%;
+    .text-box {
+        font-size:1.2rem;
     }
 
-    #followText {
-        font-size:6vw;
+    #section3 .container {
+        flex-direction:column-reverse;
     }
 }
 </style>
 </head>
 <body>
 
-<!-- Section 1 -->
-<div class="section1">
-    hai reenn
-</div>
+<!-- SECTION 1 -->
+<section id="section1">
+    <div class="text-box">
+        hai reen
+    </div>
+</section>
 
-<!-- Section 2 -->
-<div class="section2">
-    <img id="leftImg" class="image" src="flowers2.png" alt="Left Image">
-    <img id="rightImg" class="image" src="flowers.png" alt="Right Image">
-    <div id="centerText">im sorry</div>
-</div>
+<!-- SECTION 2 -->
+<section id="section2">
+    <div class="container">
+        <img src="moody.png" alt="Moody Image">
+        <div class="text-box">
+            i tak sengaja buat macam tu last night, i never intended to do that.
+        </div>
+    </div>
+</section>
 
-<!-- Section 3 -->
-<div class="section3">
-    <img id="movingImage" src="moody.png" alt="Moving Image">
-    <div id="followText">i tak sengaja buat macam tu</div>
-</div>
+<!-- SECTION 3 -->
+<section id="section3">
+    <div class="container">
+        <div class="text-box">
+            I tahu you going through a lot right now. I know you are strong enough to handle it. I always doakan untuk you sayang.
+        </div>
+        <img src="flowers.png" alt="Flowers Image">
+    </div>
+</section>
+
+<!-- SECTION 4 -->
+<section id="section4">
+    <div class="container">
+        <div class="text-box">
+            I love you, reen
+        </div>
+        <img src="love.png" alt="Love Image">
+    </div>
+</section>
 
 <script>
-// ===== GET ELEMENTS =====
-let left = document.getElementById("leftImg");
-let right = document.getElementById("rightImg");
-let text = document.getElementById("centerText");
-
-let img = document.getElementById("movingImage");
-let followText = document.getElementById("followText");
-
-// ===== SCROLL EVENT =====
-window.addEventListener("scroll", function() {
-
-    let scroll = window.scrollY;
-
-    /* ----- SECTION 2: images move toward center ----- */
-    let maxMove2 = (window.innerWidth/2 - left.offsetWidth/2 - 20);
-    let move2 = scroll * 0.5;
-    if(move2 > maxMove2) move2 = maxMove2;
-
-    left.style.transform = `translateX(${move2}px)`;
-    right.style.transform = `translateX(${-move2}px)`;
-
-    if(move2 > 200){
-        text.style.opacity = 1;
-    }
-
-    /* ----- SECTION 3: image moves left->right, text trails ----- */
-    let maxMove3 = window.innerWidth - img.offsetWidth - 20;
-
-    let imgMove = scroll * 0.5;
-    if(imgMove > maxMove3) imgMove = maxMove3;
-    img.style.transform = `translateX(${imgMove}px)`;
-
-    let textMove = scroll * 0.35;
-    if(textMove > maxMove3) textMove = maxMove3;
-    followText.style.transform = `translateX(${textMove}px)`;
-
+// Optional: play audio via JS in case autoplay is blocked
+window.addEventListener('load', function() {
+    const audio = document.getElementById('backgroundAudio');
+    audio.play().catch(() => {
+        console.log('Autoplay blocked, user interaction required.');
+    });
 });
 </script>
 
