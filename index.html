@@ -26,35 +26,35 @@ section {
 
 /* TEXT STYLE */
 .text-box {
-    max-width: 500px;
-    font-size: 1.5rem;
-    line-height:1.6;
+    max-width: 700px;
+    font-size: 2rem;   /* scaled up */
+    line-height:1.8;
 }
 
 /* SECTION 2 IMAGE LEFT */
 #section2 .container {
     display:flex;
     align-items:center;
-    gap:20px;
+    gap:30px;  /* more space */
     flex-wrap:wrap;
 }
 
 #section2 img {
-    width:300px;
-    max-width: 40%;
+    width:400px;   /* larger */
+    max-width: 50%;
 }
 
 /* SECTION 3 IMAGE RIGHT */
 #section3 .container {
     display:flex;
     align-items:center;
-    gap:20px;
+    gap:30px;
     flex-wrap:wrap;
 }
 
 #section3 img {
-    width:300px;
-    max-width: 40%;
+    width:400px;  /* larger */
+    max-width: 50%;
     order:2; /* image on right */
 }
 
@@ -63,25 +63,25 @@ section {
     display:flex;
     flex-direction:column;
     align-items:center;
-    gap:20px;
+    gap:30px;
 }
 
 #section4 img {
-    width:250px;
-    max-width: 50%;
+    width:350px;  /* larger */
+    max-width: 60%;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE FOR MOBILE */
 @media screen and (max-width:768px) {
     #section2 img,
     #section3 img,
     #section4 img {
-        width:80%;
-        max-width: none;
+        width:90%;
+        max-width:none;
     }
 
     .text-box {
-        font-size:1.2rem;
+        font-size:2rem;  /* bigger on phone */
     }
 
     #section3 .container {
@@ -95,7 +95,7 @@ section {
 <!-- SECTION 1 -->
 <section id="section1">
     <div class="text-box">
-        hai reen
+        Dear Farazureen,
     </div>
 </section>
 
@@ -104,7 +104,7 @@ section {
     <div class="container">
         <img src="moody.png" alt="Moody Image">
         <div class="text-box">
-            i tak sengaja buat macam tu last night, i never intended to do that.
+            I tak sengaja buat macam tu last night, I never intended to do that.
         </div>
     </div>
 </section>
@@ -113,7 +113,7 @@ section {
 <section id="section3">
     <div class="container">
         <div class="text-box">
-            I tahu you going through a lot right now. I know you are strong enough to handle it. I always doakan untuk you sayang.
+            I know you going through a lot right now and I know you are strong enough to handle it. Even you kata pergi mampos pun, you still face it eventually. I'm proud of you and I always doakan you, sayang.
         </div>
         <img src="flowers.png" alt="Flowers Image">
     </div>
@@ -123,21 +123,13 @@ section {
 <section id="section4">
     <div class="container">
         <div class="text-box">
-            I love you, reen
+            I love you, Reen.
+            <br>
+            -zharif
         </div>
         <img src="love.png" alt="Love Image">
     </div>
 </section>
-
-<script>
-// Optional: play audio via JS in case autoplay is blocked
-window.addEventListener('load', function() {
-    const audio = document.getElementById('backgroundAudio');
-    audio.play().catch(() => {
-        console.log('Autoplay blocked, user interaction required.');
-    });
-});
-</script>
 
 </body>
 </html>
