@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+body{
+    margin:0;
+    height:2000px;
+    font-family:Arial;
+}
+
+/* SECTION 1 */
+
+.section1{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:60px;
+}
+
+/* SECTION 2 */
+
+.section2{
+    height:100vh;
+    position:relative;
+    overflow:hidden;
+}
+
+.image{
+    position:absolute;
+    top:40%;
+    width: 300px;
+    transition:0.1s;
+}
+
+#leftImg{
+    left:-250px;
+}
+
+#rightImg{
+    right:-250px;
+}
+
+#centerText{
+    position:absolute;
+    top:45%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:50px;
+    opacity:0;
+    transition:0.3s;
+}
+
+body{
+    margin:0;
+    height:2000px;
+    font-family: Arial;
+    background-color: #FFFDD0;
+}
+
+.section3{
+    height:100vh;
+    position:relative;
+    overflow:hidden;
+}
+
+#movingImage{
+    position:absolute;
+    top:40%;
+    left:-200px;
+    width:200px;
+}
+
+#followText{
+    position:absolute;
+    top:42%;
+    left:-150px;  /* slightly behind image at start */
+    font-size:40px;
+    white-space:nowrap;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="section1">
+    hi reen 
+</div>
+
+<div class="section2">
+
+<img id="leftImg" class="image" src="flowers2.png">
+<img id="rightImg" class="image" src="flowers.png">
+
+<div id="centerText">im sorry</div>
+
+</div>
+
+<div class="section3">
+
+<img id="movingImage" src="moody.png">
+<div id="followText">im sorry for what i did last night</div>
+
+</div>
+
+<script>
+
+let img = document.getElementById("movingImage");
+let followText = document.getElementById("followText");
+let left = document.getElementById("leftImg");
+let right = document.getElementById("rightImg");
+let text = document.getElementById("centerText");
+
+window.addEventListener("scroll", function(){
+
+    let scroll = window.scrollY;
+
+    let move = scroll * 0.5;
+
+    left.style.left = -250 + move + "px";
+    right.style.right = -250 + move + "px";
+
+    if(move > 200){
+        text.style.opacity = 1;
+    }
+
+    window.addEventListener("scroll", function(){
+
+    let scroll = window.scrollY;
+
+    // SECTION 2 (your previous images moving to center)
+    let move = scroll * 0.5;
+    left.style.left = -250 + move + "px";
+    right.style.right = -250 + move + "px";
+
+    if(move > 200){
+        text.style.opacity = 1;
+    }
+
+    // SECTION 3 (image moving left → right with text following)
+    let img = document.getElementById("movingImage");
+let followText = document.getElementById("followText");
+
+window.addEventListener("scroll", function(){
+
+    let scroll = window.scrollY;
+
+    // Image moves faster
+    let imgMove = scroll * 0.5;
+    img.style.transform = `translateX(${imgMove}px)`;
+
+    // Text trails behind slower
+    let textMove = scroll * 0.25;  // slower for trailing effect
+    followText.style.transform = `translateX(${textMove}px)`;
+
+});
+
+});
+
+});
+
+</script>
+
+</body>
+</html>
