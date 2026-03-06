@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<title>For Farazureen</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 <style>
 body {
     margin:0;
     font-family: Arial, sans-serif;
+    overflow-x:hidden;
 }
 
 /* GENERAL SECTION STYLE */
@@ -16,46 +20,57 @@ section {
     padding:20px;
     box-sizing:border-box;
     color:#fff;
+    position:relative;
 }
 
-/* SECTION COLORS */
-#section1 { background-color: #FFADAD; } /* soft red */
-#section2 { background-color: #FFD6A5; } /* soft orange */
-#section3 { background-color: #FDFFB6; color:#333; } /* soft yellow */
-#section4 { background-color: #CAFFBF; color:#333; } /* soft green */
+/* GRADIENT BACKGROUNDS */
+#section1 { background: linear-gradient(135deg, #FFADAD, #FF7F7F); }
+#section2 { background: linear-gradient(135deg, #FFD6A5, #FFB347); }
+#section3 { background: linear-gradient(135deg, #FDFFB6, #FFF176); color:#333; }
+#section4 { background: linear-gradient(135deg, #CAFFBF, #7DFFA1); color:#333; }
+#section5 { background: linear-gradient(135deg, #A0E7E5, #B4F8C8); color:#fff; }
 
-/* TEXT STYLE */
+/* TEXT BOX STYLE */
 .text-box {
-    max-width: 700px;
-    font-size: 2rem;   /* scaled up */
-    line-height:1.8;
+    max-width:800px;
+    font-size:3rem;  /* BIG text */
+    line-height:1.6;
+    background: rgba(255,255,255,0.25);
+    padding:30px 35px;
+    border-radius:25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    text-align:center;
 }
 
 /* SECTION 2 IMAGE LEFT */
 #section2 .container {
     display:flex;
     align-items:center;
-    gap:30px;  /* more space */
+    gap:40px;
     flex-wrap:wrap;
+    justify-content:center;
 }
 
 #section2 img {
-    width:400px;   /* larger */
-    max-width: 50%;
+    width:500px;
+    max-width:90%;
+    border-radius:20px;
 }
 
 /* SECTION 3 IMAGE RIGHT */
 #section3 .container {
     display:flex;
     align-items:center;
-    gap:30px;
+    gap:40px;
     flex-wrap:wrap;
+    justify-content:center;
 }
 
 #section3 img {
-    width:400px;  /* larger */
-    max-width: 50%;
-    order:2; /* image on right */
+    width:500px;
+    max-width:90%;
+    order:2;
+    border-radius:20px;
 }
 
 /* SECTION 4 IMAGE BELOW TEXT */
@@ -63,34 +78,61 @@ section {
     display:flex;
     flex-direction:column;
     align-items:center;
-    gap:30px;
+    gap:40px;
 }
 
 #section4 img {
-    width:350px;  /* larger */
-    max-width: 60%;
+    width:450px;
+    max-width:90%;
+    border-radius:20px;
+}
+
+/* SECTION 5: Signature */
+#section5 .signature {
+    font-family: 'Pacifico', cursive;
+    font-size:4rem;  /* BIG signature */
+    text-align:center;
+}
+
+/* FLOATING HEARTS */
+.heart {
+    position:absolute;
+    width:35px;
+    animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh) scale(1); opacity:0.8; }
+    100% { transform: translateY(-50px) scale(1.2); opacity:0; }
 }
 
 /* RESPONSIVE FOR MOBILE */
 @media screen and (max-width:768px) {
+    .text-box {
+        font-size:4rem;   /* MUCH bigger on mobile */
+        padding:25px 30px;
+    }
     #section2 img,
     #section3 img,
     #section4 img {
-        width:90%;
+        width:95%;
         max-width:none;
     }
-
-    .text-box {
-        font-size:2rem;  /* bigger on phone */
-    }
-
     #section3 .container {
         flex-direction:column-reverse;
+    }
+    #section5 .signature {
+        font-size:5rem;  /* HUGE signature */
     }
 }
 </style>
 </head>
 <body>
+
+<!-- FLOATING HEARTS -->
+<img src="heart.png" class="heart" style="left:15%;">
+<img src="heart.png" class="heart" style="left:50%;">
+<img src="heart.png" class="heart" style="left:80%;">
 
 <!-- SECTION 1 -->
 <section id="section1">
@@ -123,13 +165,20 @@ section {
 <section id="section4">
     <div class="container">
         <div class="text-box">
-            I love you, Reen.
-            <br>
-            -zharif
+            I love you, Reen.<br>- Zharif
         </div>
         <img src="love.png" alt="Love Image">
     </div>
 </section>
+
+<!-- RANDOM HEART ANIMATION -->
+<script>
+const hearts = document.querySelectorAll('.heart');
+hearts.forEach(heart => {
+    heart.style.top = Math.random()*100 + 'vh';
+    heart.style.animationDuration = (4 + Math.random()*4) + 's';
+});
+</script>
 
 </body>
 </html>
